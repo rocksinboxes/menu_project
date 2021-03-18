@@ -15,7 +15,7 @@ class Define_Remote_Repo:
         self.local_repo = git.Repo(self.repo)
 
     def get_json_data(self):
-        self.get_repo = f"{self.name}/{self.repo}"
+        self.get_repo = f"{self.url}/{self.name}/{self.repo}"
         self.r = requests.get(self.get_repo)
         self.r_data = self.r.json()
         return self.r_data
@@ -44,5 +44,5 @@ class Define_Remote_Repo:
         self.local_parsed_net_time = dateutil.parser.parse(
             self.remote_repo_net_time)
         self.correct_net_time = self.local_parsed_net_time.ctime()
-        if (self.local_repo_time != self.correct_net_time):
+        if self.local_repo_time != self.correct_net_time:
             return "This thing works!"

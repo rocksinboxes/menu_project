@@ -20,7 +20,7 @@ class system_check:
     def Rasp_os_ver(self):
         self.os_file = open("/etc/os-release", "r")
 
-        for self.line in self.os_fileos_file:
+        for self.line in self.os_file:
             if self.line.__contains__("VERSION_CODENAME"):
                 self.version = self.line.strip("VERSION_CODENAME=").strip('\n')
             if self.version != "buster":
