@@ -10,6 +10,7 @@ import pkg_resources
 class system_check:
     def __init__(self) -> None:
         self.minimum_python_version = "3.7.3"
+        self. minimum_distro_version="buster"
 
     def apt():
         subprocess.call(["sudo", "apt", "update"])
@@ -24,7 +25,7 @@ class system_check:
                 self.version = self.line.strip("VERSION_CODENAME=").strip('\n')
             if self.version != "buster":
                 self.os_file.close()
-            sys.exit("Your distro is not supported")
+                sys.exit("Your distro is not supported")
         self.os_file.close()
         return self.version
 
@@ -37,10 +38,10 @@ class system_check:
     def get_python_version(self):
         self.python_version = platform.python_version()
         if self.python_version < self.minimum_python_version:
-        sys.exit("Your Python Version is too low")
+            sys.exit("Your Python Version is too low")
         return self.python_version
 
-    def get_python_installed_packages():
+    def get_python_installed_packages(self):
         # This line is from https://stackoverflow.com/questions/35120646/python-programmatically-running-pip-list
         self.pip_package_list = [
             self.p.project_name for self, p in pkg_resources.working_set]
@@ -50,4 +51,4 @@ class system_check:
                 return 0
             else:
                 subprocess.call(["pip", "install", "-i"])
-            break
+                break
