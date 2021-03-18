@@ -10,7 +10,7 @@ import pkg_resources
 class system_check:
     def __init__(self) -> None:
         self.minimum_python_version = "3.7.3"
-        self. minimum_distro_version="buster"
+        self.minimum_distro_version="buster"
 
     def apt():
         subprocess.call(["sudo", "apt", "update"])
@@ -21,9 +21,9 @@ class system_check:
         self.os_file = open("/etc/os-release", "r")
 
         for self.line in self.os_file:
-            if self.line.__contains__("VERSION_CODENAME"):
+            if self.line.__contains__("VERSION_CODENAME="):
                 self.version = self.line.strip("VERSION_CODENAME=").strip('\n')
-            if self.version != "buster":
+            if self.version != self.minimum_distro_version:
                 self.os_file.close()
                 sys.exit("Your distro is not supported")
         self.os_file.close()
