@@ -44,7 +44,7 @@ class system_check:
     def get_python_installed_packages(self):
         # This line is from https://stackoverflow.com/questions/35120646/python-programmatically-running-pip-list
         self.pip_package_list = [
-            self.p.project_name for self, p in pkg_resources.working_set]
+            self.p.project_name for self.p in pkg_resources.working_set]
         for self.inter_list in self.pip_package_list:
             if self.inter_list == "GitPython":
                 print(self.inter_list)
