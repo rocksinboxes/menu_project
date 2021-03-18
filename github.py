@@ -48,6 +48,6 @@ class Define_Remote_Repo:
             return "This thing works!"
 
 
-x = Define_Remote_Repo("Botspot", "pi-apps")
+x = Define_Remote_Repo()
 t = x.timezone_convert()
 print(t)
