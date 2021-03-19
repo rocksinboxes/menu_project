@@ -1,12 +1,8 @@
-import sys, github_repo
-
-class parse_args:
-    def __init__(self) -> None:
-        self.cli_args = sys.argv
+import sys
+import github_repo
 
 
+update_repo = github_repo.Define_Remote_Repo(sys.argv[1], sys.argv[2])
 
-x=github_repo.Define_Remote_Repo('botspot','pi-apps')
-
-
-print (x.update_repo())
+data = update_repo.get_json_data()
+print(data["name"])
