@@ -1,8 +1,8 @@
-
-import requests
-import os
-import subprocess
-import tempfile
+from requests import get
+from os import remove, chmod
+from subprocess import call, run
+from tempfile import mktemp
+import default_paths
 
 
 class download_file:
@@ -11,17 +11,24 @@ class download_file:
         self.urlname = self.url.rsplit('/', 1)[1]
 
     def download(self):
-        tmp = tempfile.mktemp()
+        tmp = mktemp()
         path = tmp
-        r = requests.get(self.url, stream=True)
+        r = get(self.url, stream=True)
         download = r.content
         with open(f"{tmp}", "wb") as f:
             f.write(download)
-            os.chmod(f"{tmp}", 755)
+            chmod(f"{tmp}", 755)
             f.close()
-            subprocess.call(["sudo", f"{tmp}"])
-        os.remove(path)
+            call(["sudo", f"{tmp}"])
+        remove(path)
 
 
-x = download_file("https://deb.nodesource.com/setup_15.x")
-x.download()
+class install_deb_file:
+    def __init__(self, filename) -> None:
+        self.filename = filename
+        self.apt_install = run(
+            ["sudo", "apt", "install", f"{default_paths.default_paths.home_path}Downloads/{self.filename}"], capture_output=True)
+
+
+x = install_deb_file("firefox_86.0-1_armhf.deb")
+print(x.apt_install.returncode)
