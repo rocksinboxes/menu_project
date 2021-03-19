@@ -5,23 +5,25 @@ import os
 import sys
 import time
 import dateutil.parser
+import default_paths
 
 
-class Define_Remote_Repo:
+class Define_Remote_Repo():
+    
     def __init__(self, name, repo) -> None:
-        self.name = name
-        self.repo = repo
-        self.url = "https://api.github.com/repos/"
-        self.local_repo = git.Repo(self.repo)
-
+        self.repo=repo
+        self.name=name
+        self.local_repo = git.Repo(f"{default_paths.default_paths.home_path}{self.repo}") 
+        
     def get_json_data(self):
-        self.get_repo = f"{self.url}/{self.name}/{self.repo}"
-        self.r = requests.get(self.get_repo)
-        self.r_data = self.r.json()
-        return self.r_data
+        get_repo = f"{default_paths.default_paths.github_url}{self.name}/{self.repo}"
+        r = requests.get(get_repo)
+        r_data = r.json()
+        return r_data
 
+        
     def clone_remote_repo(self):
-        if os.path.exists(self.repo) == True:
+        if os.path.exists(f"{default_paths.default_paths.home_path}{self.repo}") == True:
             sys.exit("Exists")
         elif len(os.path.exists(self.repo)) < 0:
             git.Repo.clone_from(f"{self.url}.git", self.name)
@@ -29,7 +31,6 @@ class Define_Remote_Repo:
             sys.exit("Nothing to do")
 
     def update_repo(self):
-        self.data = requests.get(f"{self.url}/{self.name}/{self.repo}/commit")
         self.local_repo.remotes.origin.fetch()
         self.local_repo.remotes.origin.pull()
         return "Done"
