@@ -1,11 +1,7 @@
-from concurrent.futures import process
-from runpy import run_module
-import subprocess
-import os
-import sys
-import platform
-import pip
-import pkg_resources
+from subprocess import run
+from sys import exit
+from platform import python_version, architecture
+from pkg_resources import working_set
 
 class system_check:
     def __init__(self) -> None:
@@ -13,8 +9,8 @@ class system_check:
         self.minimum_distro_version="buster"
 
     def apt():
-        subprocess.call(["sudo", "apt", "update"])
-        subprocess.call(["sudo", "apt", "upgrade", "-y"])
+        run(["sudo", "apt", "update"])
+        run(["sudo", "apt", "upgrade", "-y"])
         return "done"
 
     def Rasp_os_ver(self):
@@ -25,26 +21,26 @@ class system_check:
                 self.version = self.line.strip("VERSION_CODENAME=").strip('\n')
             if self.version != self.minimum_distro_version:
                 self.os_file.close()
-                sys.exit("Your distro is not supported")
+                sys.exit( "Your distro is not supported")
         self.os_file.close()
         return self.version
 
     def platform_check(self):
-        self.plat = platform.architecture()
+        self.plat = architecture()
         if (self.plat[0] != "32bit"):
             sys.exit("Invalid Arch")
         return self.plat[0]
 
     def get_python_version(self):
-        self.python_version = platform.python_version()
+        self.python_version = python_version()
         if self.python_version < self.minimum_python_version:
-            sys.exit("Your Python Version is too low")
+            exit("Your Python Version is too low")
         return self.python_version
 
     def get_python_installed_packages(self):
         # This line is from https://stackoverflow.com/questions/35120646/python-programmatically-running-pip-list
         self.pip_package_list = [
-            self.p.project_name for self.p in pkg_resources.working_set]
+            self.p.project_name for self.p in working_set]
         for self.inter_list in self.pip_package_list:
             if self.inter_list == "GitPython":
                 print(self.inter_list)

@@ -1,6 +1,6 @@
 from requests import get
 from os import remove, chmod
-from subprocess import call, run
+from subprocess import run
 from tempfile import mktemp
 import default_paths
 
@@ -19,7 +19,7 @@ class download_file:
             f.write(download)
             chmod(f"{tmp}", 755)
             f.close()
-            call(["sudo", f"{tmp}"])
+        run(["sudo", f"{tmp}"])
         remove(path)
 
 
