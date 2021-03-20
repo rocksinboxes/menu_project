@@ -1,29 +1,12 @@
 
-from gettext import install
 from sys import argv, exit
-from subprocess import call, run
-from file_download import download_file
-import system_checks
 import locale
+import packages
 locale.setlocale(locale.LC_ALL, '')
 
 
-class nodejs:
-    def __init__(self) -> None:
-        self.name = "nodejs"
-        self.download = download_file("https://deb.nodesource.com/setup_15.x")
+nodejs = packages.nodejs()
 
-    def nodejs_install(self):
-        self.download.download_installer()
-        run(["sudo", "apt", "install", self.name, "-y"])
-
-    def nodejs_update(self):
-        run(["sudo", "apt", "update"])
-        run(["sudo", "apt", "upgrade"])
-        return 0
-
-
-nodejs = nodejs()
 try:
 
     len (argv[2]) == 0
