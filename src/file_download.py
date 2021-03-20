@@ -30,5 +30,3 @@ class install_deb_file:
             ["sudo", "apt", "install", f"{default_paths.default_paths.home_path}Downloads/{self.filename}"], capture_output=True)
 
 
-x = install_deb_file("firefox_86.0-1_armhf.deb")
-print(x.apt_install.returncode)

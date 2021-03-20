@@ -9,24 +9,25 @@ from git import Repo
 
 
 class define_remote_repo():
-    
+
     def __init__(self, name, repo) -> None:
-        self.repo=repo
-        self.name=name
-        self.local_repo = Repo(f"{default_paths.default_paths.home_path}{self.repo}") 
-        
+        self.repo = repo
+        self.name = name
+        self.local_repo = Repo(
+            f"{default_paths.default_paths.home_path}{self.repo}")
+
     def get_json_data(self):
         get_repo = f"{default_paths.default_paths.github_url}{self.name}/{self.repo}"
         r = get(get_repo)
         r_data = r.json()
         return r_data
 
-        
     def clone_remote_repo(self):
         if path.exists(f"{default_paths.default_paths.home_path}{self.repo}") == True:
             exit("Exists")
         elif len(path.exists(self.repo)) < 0:
-            Repo.clone_from(f"{default_paths.default_paths.github_url}.git", self.name)
+            Repo.clone_from(
+                f"{default_paths.default_paths.github_url}.git", self.name)
         else:
             exit("Nothing to do")
 
