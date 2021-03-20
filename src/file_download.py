@@ -15,11 +15,11 @@ class download_file:
         path = tmp
         r = get(self.url, stream=True)
         download = r.content
-        with open(f"{tmp}", "wb") as f:
+        with open(tmp, "wb") as f:
             f.write(download)
-            chmod(f"{tmp}", 755)
+            chmod(tmp, 755)
             f.close()
-        run(["sudo", f"{tmp}"])
+        run(["sudo", tmp])
         remove(path)
 
 

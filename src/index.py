@@ -1,31 +1,40 @@
 
-from sys import argv
-from subprocess import run
-import file_download
+from gettext import install
+from sys import argv, exit
+from subprocess import call, run
+from file_download import download_file
+import system_checks
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 
-class main_menu:
+class nodejs:
+    def __init__(self) -> None:
+        self.name = "nodejs"
+        self.download = download_file("https://deb.nodesource.com/setup_15.x")
 
-    Title = "Main menu:"
-    opt1 = ("1: Install Nodejs")
-    
+    def nodejs_install(self):
+        self.download.download_installer()
+        run(["sudo", "apt", "install", self.name, "-y"])
+
+    def nodejs_update(self):
+        run(["sudo", "apt", "update"])
+        run(["sudo", "apt", "upgrade"])
+        return 0
+
+
+nodejs = nodejs()
+try:
+
+    len (argv[2]) == 0
         
+except:
+        exit("You didn't enter any parameters")
 
-
-main = main_menu()
-run("clear")
-print(main_menu.Title)
-print (main_menu.opt1)
-
-def menu_input():
-    menu_input= input("Enter Your Choice:")
-    while menu_input !="q":
-        if menu_input == '1':
-            nodejs = file_download.download_file("https://deb.nodesource.com/setup_15.x")
-            nodejs.download_installer()
-            run(["clear"])
-        print(main_menu.Title)
-        print (main_menu.opt1)
-        menu_input= input("Enter Your Choice:")
-        run(["clear"])
-menu_input()
+try:
+    if argv[1] == "update" or argv[1] == "install":
+        for val in argv[2:]:
+            function = f"{val}.{val}_{argv[1]}()"
+            eval(function)
+except:
+    exit("Invalid Entry. Please Try again")
