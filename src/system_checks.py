@@ -38,15 +38,9 @@ class system_check:
         if self.python_version < self.minimum_python_version:
             exit("Your Python Version is too low")
         return self.python_version
-
-    def get_python_installed_packages(self):
-        # This line is from https://stackoverflow.com/questions/35120646/python-programmatically-running-pip-list
-        self.pip_package_list = [
-            self.p.project_name for self.p in working_set]
-        for self.inter_list in self.pip_package_list:
-            if self.inter_list == "GitPython":
-                print(self.inter_list)
-                return 0
-            else:
-                run(["pip", "install", "-i"])
-                break
+    
+    def install_required_packages():
+        file = open("/home/pi/menu_project/requirements.txt", "r")
+        for line in file:
+            print(line)
+        file.close()

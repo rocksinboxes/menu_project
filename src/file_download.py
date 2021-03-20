@@ -19,7 +19,6 @@ class download_file:
             f.write(download)
             chmod(tmp, 755)
             f.close()
-        run(["sudo", tmp])
         remove(path)
 
 
