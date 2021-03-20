@@ -8,7 +8,7 @@ import default_paths
 from git import Repo
 
 
-class define_Remote_Repo():
+class define_remote_repo():
     
     def __init__(self, name, repo) -> None:
         self.repo=repo
@@ -25,7 +25,7 @@ class define_Remote_Repo():
     def clone_remote_repo(self):
         if path.exists(f"{default_paths.default_paths.home_path}{self.repo}") == True:
             exit("Exists")
-        elif len(os.path.exists(self.repo)) < 0:
+        elif len(path.exists(self.repo)) < 0:
             Repo.clone_from(f"{default_paths.default_paths.github_url}.git", self.name)
         else:
             exit("Nothing to do")

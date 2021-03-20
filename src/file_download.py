@@ -10,7 +10,7 @@ class download_file:
         self.url = url
         self.urlname = self.url.rsplit('/', 1)[1]
 
-    def download(self):
+    def download_installer(self):
         tmp = mktemp()
         path = tmp
         r = get(self.url, stream=True)

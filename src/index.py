@@ -1,5 +1,6 @@
-import sys
-import github_repo
+from sys import argv
+from github_repo import define_remote_repo
 
 
-update_repo = github_repo.define_Remote_Repo(sys.argv[1], sys.argv[2])
+update_repo = define_remote_repo(argv[1], argv[2])
+print(argv[1], argv[2])

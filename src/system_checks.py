@@ -8,12 +8,12 @@ class system_check:
         self.minimum_python_version = "3.7.3"
         self.minimum_distro_version="buster"
 
-    def apt():
-        run(["sudo", "apt", "update"])
-        run(["sudo", "apt", "upgrade", "-y"])
-        return "done"
+    def apt(self):
+        self.apt_update=run(["sudo", "apt", "update"],capture_output=True)
+        self.apt_upgrade=run(["sudo", "apt", "upgrade", "-y"],capture_output=True)
+        return f"Your apt update return code is {self.apt_update.returncode} and your apt upgrade is {self.apt_update.returncode}"
 
-    def Rasp_os_ver(self):
+    def rasp_os_ver(self):
         self.os_file = open("/etc/os-release", "r")
 
         for self.line in self.os_file:
@@ -21,14 +21,14 @@ class system_check:
                 self.version = self.line.strip("VERSION_CODENAME=").strip('\n')
             if self.version != self.minimum_distro_version:
                 self.os_file.close()
-                sys.exit( "Your distro is not supported")
+                exit( "Your distro is not supported")
         self.os_file.close()
         return self.version
 
     def platform_check(self):
         self.plat = architecture()
         if (self.plat[0] != "32bit"):
-            sys.exit("Invalid Arch")
+            exit("Invalid Arch")
         return self.plat[0]
 
     def get_python_version(self):
@@ -46,5 +46,5 @@ class system_check:
                 print(self.inter_list)
                 return 0
             else:
-                subprocess.call(["pip", "install", "-i"])
+                run(["pip", "install", "-i"])
                 break
