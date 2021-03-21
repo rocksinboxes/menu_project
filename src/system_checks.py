@@ -1,3 +1,4 @@
+from gettext import install
 from subprocess import run
 from sys import exit
 from platform import python_version, architecture
@@ -24,11 +25,11 @@ class system_check:
             f.close()
         return True
 
-    def platform_check(self):
-        self.plat = architecture()
-        if (self.plat[0] != "32bit"):
+    def platform_check():
+        plat = architecture()
+        if plat[0] != "32bit":
             exit("Invalid Arch")
-        return self.plat[0]
+        return plat[0]
 
     def get_python_version(self):
         self.python_version = python_version()
@@ -37,7 +38,7 @@ class system_check:
         return self.python_version
 
     def install_required_pip_packages():
-
+        run (["python", "-m", "install", "--upgrade", "pip", "systemtools", "disttools"])
         with open('/home/pi/menu_project/requirements.txt', 'r') as f:
             for line in f:
                 data = line.strip("\n").split()[0]
