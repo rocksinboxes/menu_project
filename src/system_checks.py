@@ -1,7 +1,6 @@
 from subprocess import run
 from sys import exit
 from platform import python_version, architecture
-from pkg_resources import working_set
 
 
 class system_check:
@@ -9,11 +8,11 @@ class system_check:
         self.minimum_python_version = "3.7.3"
         self.minimum_distro_version = "buster"
 
-    def apt(self):
-        self.apt_update = run(["sudo", "apt", "update"], capture_output=True)
-        self.apt_upgrade = run(
-            ["sudo", "apt", "upgrade", "-y"], capture_output=True)
-        return f"Your apt update return code is {self.apt_update.returncode} and your apt upgrade is {self.apt_update.returncode}"
+    def apt_system_checks():
+        run(["sudo", "apt", "update"])
+        run(
+            ["sudo", "apt", "upgrade", "-y"])
+ 
 
     def rasp_os_ver(self):
         self.os_file = open("/etc/os-release", "r")
