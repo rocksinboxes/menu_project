@@ -37,9 +37,10 @@ class system_check:
         if self.python_version < self.minimum_python_version:
             exit("Your Python Version is too low")
         return self.python_version
-    
-    def install_required_packages():
-        file = open("/home/pi/menu_project/requirements.txt", "r")
-        for line in file:
-            print(line)
-        file.close()
+    def install_required_pip_packages():
+        
+        with open('/home/pi/menu_project/requirements.txt', 'r') as f:
+            for line in f:
+                data=line.strip("\n").split()[0]
+                run(["pip", "install", data])
+                f.close() 

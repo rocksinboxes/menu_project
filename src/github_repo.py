@@ -30,11 +30,11 @@ class define_remote_repo():
                 f"{default_paths.default_paths.github_url}.git", self.name)
         else:
             exit("Nothing to do")
-
+        exit(0)
     def update_repo(self):
         self.local_repo.remotes.origin.fetch()
         self.local_repo.remotes.origin.pull()
-        return "Done"
+        exit(0)
 
     def timezone_convert(self):
         self.local_heads = self.local_repo.head.commit
@@ -47,4 +47,6 @@ class define_remote_repo():
             self.remote_repo_net_time)
         self.correct_net_time = self.local_parsed_net_time.ctime()
         if self.local_repo_time != self.correct_net_time:
-            return "This thing works!"
+           self.local_repo.remotes.origin.fetch()
+           self.local_repo.remotes.origin.pull()
+        exit(0)

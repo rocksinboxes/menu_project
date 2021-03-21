@@ -14,10 +14,10 @@ try:
 except:
         exit("You didn't enter any parameters")
 
-#try:
-if argv[1] == "update" or argv[1] == "install":
-    for val in argv[2:]:
-        function = f"{val}.{val}_{argv[1]}()"
-        eval(function)
-#except:
- #   exit("Invalid Entry. Please Try again")
+try:
+    if argv[1] == "update" or argv[1] == "install":
+        for val in argv[2:]:
+            function = f"{val}.{val}_{argv[1]}()"
+            eval(function)
+except:
+    exit("Invalid Entry. Please Try again")
