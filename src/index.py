@@ -9,10 +9,10 @@ nodejs = packages.nodejs()
 
 try:
 
-    len (argv[2]) == 0
-        
+    len(argv[2]) == 0
+
 except:
-        exit("You didn't enter any parameters")
+    exit("You didn't enter any parameters")
 
 try:
     if argv[1] == "update" or argv[1] == "install":

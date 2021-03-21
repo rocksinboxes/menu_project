@@ -31,6 +31,7 @@ class define_remote_repo():
         else:
             exit("Nothing to do")
         exit(0)
+
     def update_repo(self):
         self.local_repo.remotes.origin.fetch()
         self.local_repo.remotes.origin.pull()
@@ -47,6 +48,6 @@ class define_remote_repo():
             self.remote_repo_net_time)
         self.correct_net_time = self.local_parsed_net_time.ctime()
         if self.local_repo_time != self.correct_net_time:
-           self.local_repo.remotes.origin.fetch()
-           self.local_repo.remotes.origin.pull()
+            self.local_repo.remotes.origin.fetch()
+            self.local_repo.remotes.origin.pull()
         exit(0)

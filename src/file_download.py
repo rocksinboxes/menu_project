@@ -27,5 +27,3 @@ class install_deb_file:
         self.filename = filename
         self.apt_install = run(
             ["sudo", "apt", "install", f"{default_paths.default_paths.home_path}Downloads/{self.filename}"])
-
-

@@ -12,19 +12,17 @@ class system_check:
         run(["sudo", "apt", "update"])
         run(
             ["sudo", "apt", "upgrade", "-y"])
- 
 
     def rasp_os_ver(self):
-        self.os_file = open("/etc/os-release", "r")
-
-        for self.line in self.os_file:
-            if self.line.__contains__("VERSION_CODENAME="):
-                self.version = self.line.strip("VERSION_CODENAME=").strip('\n')
-            if self.version != self.minimum_distro_version:
-                self.os_file.close()
-                exit("Your distro is not supported")
-        self.os_file.close()
-        return self.version
+        os_file = "/etc/os-release"
+        with open(os_file, 'r') as f:
+            data = f.read()
+            data = data.splitlines()[4].split("=")[1]
+            if data != self.minimum_distro_version:
+                f.close()
+                exit("Unsupported Distro")
+            f.close()
+        return True
 
     def platform_check(self):
         self.plat = architecture()
@@ -37,10 +35,11 @@ class system_check:
         if self.python_version < self.minimum_python_version:
             exit("Your Python Version is too low")
         return self.python_version
+
     def install_required_pip_packages():
-        
+
         with open('/home/pi/menu_project/requirements.txt', 'r') as f:
             for line in f:
-                data=line.strip("\n").split()[0]
+                data = line.strip("\n").split()[0]
                 run(["pip", "install", data])
-                f.close() 
+                f.close()
