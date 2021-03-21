@@ -19,12 +19,14 @@ class nodejs:
         system_check.apt_system_checks()
 
 class asdf:
+    name='asdf-vm'
+    repo ='asdf'
+    local_repo=".asdfbv"
+
     def asdf_install():
-        name="asdf-vm"
-        repo="asdf"
-        local_repo=".asdf"
-        github_repo.define_remote_repo.clone_remote_repo(name,repo,local_repo)
+        github_repo.define_remote_repo.clone_remote_repo(asdf.name,asdf.repo,asdf.local_repo)
 
-        
 
-test = asdf.asdf_install()
+test=asdf
+test.asdf_install()
+

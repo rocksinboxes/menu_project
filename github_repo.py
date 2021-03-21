@@ -22,15 +22,11 @@ class define_remote_repo():
         r_data = r.json()
         return r_data
 
-    def clone_remote_repo(self):
-        if path.exists(f"{default_paths.default_paths.home_path}{self.repo}") == True:
-            exit("Exists")
-        elif len(path.exists(self.repo)) < 0:
-            Repo.clone_from(
-                f"{default_paths.default_paths.github_url}.git", self.name)
-        else:
-            exit("Nothing to do")
-        exit(0)
+    def clone_remote_repo(name,repo,local_repo):
+        name=name
+        repo=repo
+        local_repo=f"/home/pi/{local_repo}"
+        Repo.clone_from( f"https://github.com/{name}/{repo}.git", local_repo)
 
     def update_repo(self):
         self.local_repo.remotes.origin.fetch()
