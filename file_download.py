@@ -1,26 +1,29 @@
 from requests import get
 from os import remove, chmod
-from subprocess import run
-from tempfile import mktemp
+from subprocess import run,call
+import tempfile 
 import default_paths
 
 
-class download_file:
-    def __init__(self, url) -> None:
-        self.url = url
-        self.urlname = self.url.rsplit('/', 1)[1]
+class download_file():
 
-    def download_installer(self):
-        tmp = mktemp()
-        path = tmp
-        r = get(self.url, stream=True)
-        download = r.content
-        with open(tmp, "wb") as f:
-            f.write(download)
-            chmod(tmp, 755)
+    def download_installer(url):
+        download=url
+        r= get(download, stream=True)
+        data=r.content
+        with open("/home/pi/test.sh", "wb") as f:
+            f.write(data)
+            chmod ('/home/pi/test.sh',755)
             f.close()
-        remove(path)
+    
 
+     
+       
+    
+        
+        
+
+        
 
 class install_deb_file:
     def __init__(self, filename) -> None:

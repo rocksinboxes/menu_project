@@ -6,14 +6,11 @@ import github_repo
 
 
 class nodejs:
-        
-
-    def nodejs_install(self):
-        self.name=name
-        self.name = "nodejs"
-        self.download = download_file("https://deb.nodesource.com/setup_15.x")
-        self.download.download_installer()
-        run(["sudo", "apt", "install", name, "-y"])
+    name="nodejs"
+    url= "https://deb.nodesource.com/setup_15.x"
+    def nodejs_install():
+        download_file.download_installer(nodejs.url)
+    #run(["sudo", "apt", "install", name, "-y"])
 
     def nodejs_update():
         system_check.apt_system_checks()
@@ -27,6 +24,5 @@ class asdf:
         github_repo.define_remote_repo.clone_remote_repo(asdf.name,asdf.repo,asdf.local_repo)
 
 
-test=asdf
-test.asdf_install()
-
+n=nodejs
+n.nodejs_install()
