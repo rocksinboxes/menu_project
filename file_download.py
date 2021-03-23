@@ -1,5 +1,5 @@
 from requests import get
-from os import remove, chmod
+from os import remove, chmod,close,fchmod,path,unlink,umask,stat,write,remove
 from subprocess import run,call
 import tempfile 
 import default_paths
@@ -11,11 +11,13 @@ class download_file():
         download=url
         r= get(download, stream=True)
         data=r.content
-        with open("/home/pi/test.sh", "wb") as f:
-            f.write(data)
-            chmod ('/home/pi/test.sh',755)
-            f.close()
-    
+        temp_fd, temp_name = tempfile.mkstemp(dir="/tmp", prefix='install-',suffix='.sh')
+        write(temp_fd, r.content)
+        close(temp_fd)
+        chmod(temp_name, 0o755)
+        call(['sudo', temp_name])
+        remove(temp_name)
+   
 
      
        
