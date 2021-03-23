@@ -1,5 +1,6 @@
 
 from sys import argv, exit
+import os
 import locale
 import packages
 locale.setlocale(locale.LC_ALL, '')
