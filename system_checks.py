@@ -1,4 +1,3 @@
-from gettext import install
 from subprocess import run
 from sys import exit
 from platform import python_version, architecture
@@ -37,7 +36,7 @@ class system_check:
         return self.python_version
 
     def install_required_pip_packages():
-        run (["pip", "install", "--upgrade" "pip", "systemtools", "disttools"])
+        run(["pip", "install", "--upgrade" "pip", "systemtools", "disttools"])
         with open('/home/pi/menu_project/requirements.txt', 'r') as f:
             for line in f:
                 data = line.strip("\n").split()[0]

@@ -12,7 +12,7 @@ try:
 
     len(argv[2]) == 0
 
-except:
+except BaseException:
     exit("You didn't enter any parameters")
 
 try:
@@ -20,5 +20,5 @@ try:
         for val in argv[2:]:
             function = f"{val}.{val}_{argv[1]}()"
             eval(function)
-except:
+except BaseException:
     exit("Invalid Entry. Please Try again")

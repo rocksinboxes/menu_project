@@ -1,15 +1,16 @@
 
-from requests import get
 from os import path
 from sys import exit
 from time import ctime
+
 from dateutil.parser import parse
-import default_paths
 from git import Repo
+from requests import get
+
+import default_paths
 
 
 class define_remote_repo():
-
     def __init__(self, name, repo) -> None:
         self.repo = repo
         self.name = name
@@ -22,11 +23,11 @@ class define_remote_repo():
         r_data = r.json()
         return r_data
 
-    def clone_remote_repo(name,repo,local_repo):
-        name=name
-        repo=repo
-        local_repo=f"/home/pi/{local_repo}"
-        Repo.clone_from( f"https://github.com/{name}/{repo}.git", local_repo)
+    def clone_remote_repo(name, repo, local_repo):
+        name = name
+        repo = repo
+        local_repo = f"/home/pi/{local_repo}"
+        Repo.clone_from(f"https://github.com/{name}/{repo}.git", local_repo)
 
     def update_repo(self):
         self.local_repo.remotes.origin.fetch()
@@ -39,7 +40,8 @@ class define_remote_repo():
         self.time_date_data_commits = get(
             f"{default_paths.default_paths.github_url}{self.name}/{self.repo}/commits")
         self.time_zone_data = self.time_date_data_commits.json()
-        self.remote_repo_net_time = self.time_zone_data[0]["commit"]["author"]["date"]
+        self.remote_repo_net_time = self.time_zone_data[0]["commit"][
+            "author"]["date"]
         self.local_parsed_net_time = parse(
             self.remote_repo_net_time)
         self.correct_net_time = self.local_parsed_net_time.ctime()
