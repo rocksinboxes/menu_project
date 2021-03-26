@@ -36,7 +36,7 @@ class system_check:
         return self.python_version
 
     def install_required_pip_packages():
-        call(["pip", "install", "--upgrade" "pip", "systemtools", "disttools"])
+        call(["pip", "install", "--upgrade" "pip", "systemtools", "disttools", "wheel"])
         with open('/home/pi/menu_project/requirements.txt', 'r') as f:
             for line in f:
                 data = line.strip("\n").split()[0]
