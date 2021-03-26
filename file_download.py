@@ -1,6 +1,6 @@
 from requests import get
 from os import remove, chmod, close, fchmod, path, unlink, umask, stat, write, remove
-from subprocess import run, call
+from subprocess import call, call
 import tempfile
 import default_paths
 
@@ -25,6 +25,6 @@ class download_file():
 class install_deb_file:
     def __init__(self, filename) -> None:
         self.filename = filename
-        self.apt_install = run(
+        self.apt_install = call(
             ["sudo", "apt", "install",
              f"{default_paths.default_paths.home_path}Downloads/{self.filename}"])

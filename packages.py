@@ -1,5 +1,5 @@
 
-from subprocess import run
+from subprocess import call
 from file_download import download_file
 from system_checks import system_check
 import github_repo
@@ -11,7 +11,7 @@ class nodejs:
 
     def nodejs_install():
         download_file.download_installer(nodejs.url)
-    #run(["sudo", "apt", "install", name, "-y"])
+    #call(["sudo", "apt", "install", name, "-y"])
 
     def nodejs_update():
         system_check.apt_system_checks()

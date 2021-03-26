@@ -1,4 +1,4 @@
-from subprocess import run
+from subprocess import call
 from sys import exit
 from platform import python_version, architecture
 
@@ -9,8 +9,8 @@ class system_check:
         self.minimum_distro_version = "buster"
 
     def apt_system_checks():
-        run(["sudo", "apt", "update"])
-        run(["sudo", "apt", "upgrade", "-y"])
+        call(["sudo", "apt", "update"])
+        call(["sudo", "apt", "upgrade", "-y"])
 
     def rasp_os_ver(self):
         os_file = "/etc/os-release"
@@ -36,10 +36,10 @@ class system_check:
         return self.python_version
 
     def install_required_pip_packages():
-        run(["pip", "install", "--upgrade" "pip", "systemtools", "disttools"])
+        call(["pip", "install", "--upgrade" "pip", "systemtools", "disttools"])
         with open('/home/pi/menu_project/requirements.txt', 'r') as f:
             for line in f:
                 data = line.strip("\n").split()[0]
-                run(["pip", "install", data])
+                call(["pip", "install", data])
                 f.close()
                 exit(0)
